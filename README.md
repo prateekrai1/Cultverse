@@ -8,33 +8,33 @@ shirts, hats, mugs, and posters. The project is expected to be a valuable resour
 and earning free merchandise.
 
 Social Media:
-• This part of the website would allow users to Post using any picture and like, comment and Re-share on their feed.
-• Users should be able to view all thier posts and search for posts by category and user.
+This part of the website would allow users to Post using any picture and like, comment and Re-share on their feed.
+Users should be able to view all thier posts and search for posts by category and user.
 
 Merchandise:
-• This module would allow users to browse and purchase merchandise from popular
+This module would allow users to browse and purchase merchandise from popular
 franchises.
-• Users should be able to filter and search for merchandise by category, franchise,
+Users should be able to filter and search for merchandise by category, franchise,
 keyword, price, etc.
-• Users should be able to view detailed information about each merchandise item,
+Users should be able to view detailed information about each merchandise item,
 including the product description, images, reviews, and ratings.
-• Users should be able to add merchandise items to their cart and checkout to purchase
+Users should be able to add merchandise items to their cart and checkout to purchase
 them.
 
 Trivia: 
-• This module would allow users to play trivia games and earn points.
-• Users should be able to browse and search for trivia games by category, franchise,
+This module would allow users to play trivia games and earn points.
+Users should be able to browse and search for trivia games by category, franchise,
 keyword, difficulty level, etc.
-• Users should be able to create their own trivia games or play games created by other
+Users should be able to create their own trivia games or play games created by other
 users.
-• Users should be able to answer trivia questions and earn points for each correct answer.
+Users should be able to answer trivia questions and earn points for each correct answer.
 Users should be able to view their current point balance and a leaderboard of the top
 players.
 
 Points:
-• This module would allow users to track their points and redeem them for free
+This module would allow users to track their points and redeem them for free
 merchandise.
-• Users should be able to view their current point balance and a list of all the merchandise
+Users should be able to view their current point balance and a list of all the merchandise
 items that they can redeem their points for.
-• Users should be able to redeem their points for free merchandise by adding them to their
+Users should be able to redeem their points for free merchandise by adding them to their
 cart and checking out.
