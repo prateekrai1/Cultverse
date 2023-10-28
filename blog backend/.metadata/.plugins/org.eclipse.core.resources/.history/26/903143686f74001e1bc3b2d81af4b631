@@ -1,0 +1,106 @@
+package com.blog.services.impl;
+
+import java.util.List;
+
+import java.util.stream.Collectors;
+
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.blog.exceptions.*;
+import com.blog.payloads.UserDTO;
+import com.blog.repositories.UserRepo;
+import com.blog.services.UserService;
+import com.blog.entities.*;
+
+@Service
+public class UserServiceImpl implements UserService {
+
+	@Autowired
+	private UserRepo userRepo;
+	
+	@Autowired
+	private ModelMapper modelmap;
+	
+	@Override
+	public UserDTO createUser(UserDTO userdto) {
+		
+		UserEntity user = this.dtoToUser(userdto);
+		UserEntity savedUser = this.userRepo.save(user);
+		
+		return this.userToDto(savedUser);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public UserDTO updateUser(UserDTO userdto, Integer userId) {
+		try {
+			UserEntity user = this.userRepo.findById(userId)
+					.orElseThrow(() -> new ResourceNotFoundException("User", "id", userId));
+
+			user.setName(userdto.getName());
+			user.setEmail(userdto.getEmail());
+			user.setPassword(userdto.getPassword());
+			user.setAbout(userdto.getAbout());
+
+			UserEntity updateUser = (UserEntity) this.userRepo.save(user);
+			UserDTO userdto1 = this.userToDto(updateUser);
+
+		} catch (Throwable e) {
+			e.printStackTrace();
+		}
+		return userdto;
+
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public UserDTO getUserById(Integer userId){
+		UserEntity user1 = new UserEntity();
+		try {
+			UserEntity user = this.userRepo.findById(userId)
+					.orElseThrow(() -> new ResourceNotFoundException("User", "id", userId));
+			return this.userToDto(user);
+		} catch (Throwable e) {
+			e.printStackTrace();
+
+		}
+		return this.userToDto(user1);
+		
+	}
+
+	@Override
+	public List<UserDTO> allUsers() {
+		@SuppressWarnings("unchecked")
+		List<UserEntity>users = userRepo.findAll();
+		List<UserDTO>allUsers = users.stream().map(user->userToDto(user))
+								.collect(Collectors.toList());
+		return allUsers;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public void deleteUser(Integer userId) {
+		try {
+			UserEntity user =  this.userRepo.findById(userId).orElseThrow(
+					()->new ResourceNotFoundException("User", "Id", userId));
+			this.userRepo.delete(user);
+		
+		} catch (Throwable e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public UserEntity dtoToUser(UserDTO userdto) {
+		
+		UserEntity user = modelmap.map(userdto, UserEntity.class);	
+		return user;
+	}
+	
+	public UserDTO userToDto(UserEntity user) {
+		
+		UserDTO userDto = modelmap.map(user, UserDTO.class);
+		return userDto;	
+	}
+}

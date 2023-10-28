@@ -1,0 +1,9 @@
+package com.blog.payloads;
+
+public class PostResponse {
+	
+	private List<PostDTO> content;
+	private int pageNumber;
+	private int pageSize;
+	private int totalElements;
+}

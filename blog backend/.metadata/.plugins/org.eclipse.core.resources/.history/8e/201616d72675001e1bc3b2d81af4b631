@@ -1,0 +1,128 @@
+package com.blog.services.impl;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Service;
+
+import com.blog.entities.Category;
+import com.blog.entities.PostsEntity;
+import com.blog.entities.UserEntity;
+import com.blog.exceptions.ResourceNotFoundException;
+import com.blog.payloads.PostDTO;
+import com.blog.repositories.CategoryRepo;
+import com.blog.repositories.PostRepo;
+import com.blog.repositories.UserRepo;
+import com.blog.services.PostsService;
+import com.blog.payloads.PostResponse;
+
+
+@Service
+public class PostServiceImpl implements PostsService {
+
+	@Autowired
+	private PostRepo postRepo;
+	
+	@Autowired
+	private ModelMapper modelmap;
+	
+	@Autowired
+	public UserRepo userRepo;
+	
+	@Autowired
+	private CategoryRepo categoryRepo;
+	
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public PostDTO create(PostDTO postDto, Integer userId, Integer categoryId) throws Throwable {
+		
+			UserEntity user =   (UserEntity) userRepo.findById(userId).
+							 orElseThrow(()-> new ResourceNotFoundException("user", "userId", userId));
+			Category category =  (Category) categoryRepo.findById(categoryId).
+							orElseThrow(()-> new ResourceNotFoundException("category", "categoryId", categoryId));
+		
+		PostsEntity post = modelmap.map(postDto, PostsEntity.class);
+		post.setImageName("default.png");
+		post.setUploadDate(new Date());
+		post.setCategory((Category) category);
+		post.setUser((UserEntity) user);
+		
+		PostsEntity newPost= postRepo.save(post);
+		
+		return modelmap.map(newPost, PostDTO.class);
+	}
+
+	@Override
+	public PostDTO updatePost(PostDTO posDto, Integer postId) {
+		PostsEntity post = postRepo.findById(postId).orElseThrow(()-> new ResourceNotFoundException("PostEntity", "post", postId));
+		
+		post.setTitle(posDto.getTitle());
+		post.setContent(posDto.getContent());
+		post.setImageName(posDto.getImageName());
+		
+		PostsEntity updatedPost =  postRepo.save(post);
+		return modelmap.map(updatedPost, PostDTO.class);
+	}
+
+	@Override
+	public void deletePost(Integer postId) {
+		PostsEntity post = postRepo.findById(postId).orElseThrow(()-> new ResourceNotFoundException("Post", "post_id", postId));
+		postRepo.delete(post);
+	}
+
+	@Override
+	public PostDTO getPostById(Integer postId) {
+		PostsEntity post =postRepo.findById(postId).orElseThrow(()-> new ResourceNotFoundException("Post", "post_id",postId));
+		return modelmap.map(post, PostDTO.class);
+	}
+
+	@Override
+	public List<PostDTO> getPostsbyCategory(Integer categoryId) {
+		Category category = categoryRepo.findById(categoryId).
+				orElseThrow(()-> new ResourceNotFoundException("Category", "category id", categoryId));
+		List<PostsEntity> posts = this.postRepo.findByCategory(category);
+		return posts.stream().map((post)-> modelmap.map(post, PostDTO.class)).collect(Collectors.toList());
+	}
+
+	@Override
+	public List<PostDTO> getPostsbyUser(Integer userId) {
+		List<PostsEntity>posts = new ArrayList<>();
+		try {
+			UserEntity user = (UserEntity) userRepo.findById(userId).orElseThrow(()-> new ResourceNotFoundException("User", "user_id", userId));
+			posts = postRepo.findByUser(user);
+		} catch (Throwable e) {
+			e.printStackTrace();
+		}
+		return (List<PostDTO>) posts.stream().map((post)-> modelmap.map(post, PostDTO.class)).collect(Collectors.toList());
+	}
+	
+	public List<PostDTO> searchPosts(String keyword){
+		List<PostsEntity> allPost = postRepo.findAll();
+		return allPost.stream().map((post)->modelmap.map(post, PostDTO.class)).collect(Collectors.toList());
+	}
+
+	public PostResponse allPosts(Integer pageNumber, Integer pageSize, String sortBy) {
+		
+		Page<PostsEntity> postsBypage = postRepo.findAll(PageRequest.of(pageNumber, pageSize));
+		List<PostsEntity> allPosts = postsBypage.getContent();
+		List<PostDTO> posts = allPosts.stream().map((post)->modelmap.map(post, PostDTO.class)).collect(Collectors.toList());
+		
+		PostResponse post = new PostResponse();
+		
+		post.setContent(posts);
+		post.setPageNumber(postRepo.findAll(PageRequest.of(pageNumber, pageSize, Sort.by(sortBy))).getNumber());
+		post.setPageSize(postRepo.findAll(PageRequest.of(pageNumber, pageSize,Sort.by(sortBy))).getSize());
+		post.setTotalElements(postRepo.findAll(PageRequest.of(pageNumber, pageSize,Sort.by(sortBy))).getTotalElements());
+		post.setTotalPages(postRepo.findAll(PageRequest.of(pageNumber, pageSize,Sort.by(sortBy))).getTotalPages());
+		post.setLastPage(postRepo.findAll(PageRequest.of(pageNumber, pageSize,Sort.by(sortBy))).isLast());
+		return post;
+	}
+}

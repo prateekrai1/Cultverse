@@ -1,0 +1,13 @@
+package com.blog.payloads;
+
+import java.util.List;
+
+public class PostResponse {
+	
+	private List<PostDTO> content;
+	private int pageNumber;
+	private int pageSize;
+	private int totalElements;
+	
+	private boolean lastPage;
+}

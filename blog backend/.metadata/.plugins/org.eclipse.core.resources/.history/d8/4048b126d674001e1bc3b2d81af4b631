@@ -1,0 +1,34 @@
+package com.blog.services;
+
+import java.util.List;
+
+import com.blog.entities.PostsEntity;
+import com.blog.payloads.PostDTO;
+
+import jakarta.persistence.criteria.CriteriaBuilder.In;
+
+public interface PostsService {
+
+	//create
+	PostDTO create(PostDTO postDto, Integer userId, Integer categoryId) throws Throwable;
+	
+	//update
+	PostsEntity updatePost(PostDTO posDto);
+	
+	//delete
+	void deletePost(Integer postId);
+	
+	//get Single post
+	PostDTO getPostById(Integer postId);
+	
+	//get all post
+	PostDTO allPosts(Integer postId);
+	
+	//get All post by category
+	List<PostDTO> getPostsbyCategory(Integer categoryId);
+	
+	//get All post by user
+	List<PostDTO> getPostsbyUser(Integer userId) throws Throwable;
+	
+	List<PostsEntity> searchPosts(String keyword);
+}
