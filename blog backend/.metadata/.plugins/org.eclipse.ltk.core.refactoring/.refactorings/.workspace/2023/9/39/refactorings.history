@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">&#x0A;<refactoring comment="Delete resource &apos;streams-quickstart&apos;" deleteContents="false" description="Delete resource &apos;streams-quickstart&apos;" element1="/streams-quickstart" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1696028377333"/>&#x0A;<refactoring comment="Delete resource &apos;streams-quickstart-java&apos;" deleteContents="false" description="Delete resource &apos;streams-quickstart-java&apos;" element1="/streams-quickstart-java" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1696028381793"/>
+</session>

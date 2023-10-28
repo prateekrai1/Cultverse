@@ -1,0 +1,13 @@
+package com.blog.services;
+
+import java.util.List;
+
+import com.blog.payloads.CategoryDTO;
+
+public interface CategoryService {
+	CategoryDTO createCategory(CategoryDTO catDto);
+	CategoryDTO updateCategory(CategoryDTO catDto, Integer catId);
+	public void deleteCategory(Integer catId);
+	public CategoryDTO getCategory(Integer catId);
+	List<CategoryDTO> allCategories();
+}
