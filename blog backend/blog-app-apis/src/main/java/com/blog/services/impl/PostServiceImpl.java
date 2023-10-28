@@ -105,8 +105,8 @@ public class PostServiceImpl implements PostsService {
 	}
 	
 	public List<PostDTO> searchPosts(String keyword){
-		List<PostsEntity> allPost = postRepo.findAll();
-		return allPost.stream().map((post)->modelmap.map(post, PostDTO.class)).collect(Collectors.toList());
+		List<PostsEntity> posts = postRepo.findByTitle("%"+keyword+"%");
+		return posts.stream().map((post)->modelmap.map(post, PostDTO.class)).collect(Collectors.toList());
 	}
 
 	public PostResponse allPosts(Integer pageNumber, Integer pageSize, String sortBy, String sortDir) {
