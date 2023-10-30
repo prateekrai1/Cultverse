@@ -1,8 +1,10 @@
 package com.blog.controllers;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,12 +16,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.blog.config.Constants;
 import com.blog.entities.PostsEntity;
 import com.blog.payloads.ApiResponse;
+import com.blog.payloads.FileResponse;
 import com.blog.payloads.PostDTO;
 import com.blog.payloads.PostResponse;
+import com.blog.services.FileService;
 import com.blog.services.PostsService;
 
 @RestController
@@ -28,6 +33,12 @@ public class PostsController {
 	
 	@Autowired
 	PostsService postservice;
+	
+	@Autowired
+	FileService fileservice;
+	
+	@Value("${project.image}")
+	private String path;
 	
 	//create
 	@PostMapping("/user/{userId}/category/{categoryId}/createposts")
@@ -103,5 +114,18 @@ public class PostsController {
 		
 		List<PostDTO> search = postservice.searchPosts(keywords);
 		return new ResponseEntity<List<PostDTO>>(search,HttpStatus.OK);
+	}
+	
+	//postImage upload
+	@PostMapping("/image/upload/{postId}")
+	public ResponseEntity<PostDTO> uploadImage(@RequestParam("image")
+	MultipartFile image,
+	@PathVariable Integer postId) throws IOException{
+		
+		String fileName = this.fileservice.uploadImage(path, image);
+		PostDTO postdto =  postservice.getPostById(postId);
+		postdto.setImageName(fileName);
+		PostDTO post = postservice.updatePost(postdto, postId);
+		return new ResponseEntity<PostDTO>(post, HttpStatus.OK);
 	}
 }
