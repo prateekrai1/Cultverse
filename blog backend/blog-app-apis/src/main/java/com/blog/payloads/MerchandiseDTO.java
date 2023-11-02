@@ -12,5 +12,4 @@ public class MerchandiseDTO {
 	
 	private Integer merchandise_id;
 	private String merchandiseName;
-	
 }
