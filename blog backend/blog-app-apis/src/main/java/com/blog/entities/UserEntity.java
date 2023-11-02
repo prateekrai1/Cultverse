@@ -2,7 +2,9 @@ package com.blog.entities;
 
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -41,4 +43,6 @@ public class UserEntity {
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<PostsEntity> posts = new ArrayList<>();
 
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+	private Set<CommentEntity> comments = new HashSet<>();
 }
