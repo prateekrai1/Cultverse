@@ -21,6 +21,8 @@ public class ItemsEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer item_id;
+	
+	private String name;
 	private Integer quantity;
 	private Integer price;
 	
