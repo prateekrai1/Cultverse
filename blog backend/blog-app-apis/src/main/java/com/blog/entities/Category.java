@@ -35,4 +35,11 @@ public class Category {
 	
 	@OneToMany(mappedBy = "category", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<PostsEntity> posts = new ArrayList<>();
+	
+	@OneToMany(mappedBy = "category", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<MerchandiseEntity> merchandise= new ArrayList<>();
+	
+	@OneToMany(mappedBy = "category", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<ItemsEntity> items = new ArrayList<>();
 }
+
