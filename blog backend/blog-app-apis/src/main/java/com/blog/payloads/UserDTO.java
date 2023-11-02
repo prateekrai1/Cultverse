@@ -1,6 +1,11 @@
 package com.blog.payloads;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.springframework.stereotype.Component;
+
+import com.blog.entities.CommentEntity;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
@@ -33,9 +38,13 @@ public class UserDTO {
 	@NotNull
 	private String about;
 	
+	private Set<CommentDTO> comments = new HashSet<>();
+
 	@Override
 	public String toString() {
 		return "UserDTO [id=" + id + ", name=" + name + ", email=" + email + ", password=" + password + ", about="
-				+ about + "]";
+				+ about + ", comments=" + comments + "]";
 	}
+
+	
 }

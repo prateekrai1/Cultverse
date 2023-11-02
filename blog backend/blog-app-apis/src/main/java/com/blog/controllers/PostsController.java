@@ -24,7 +24,7 @@ import com.blog.payloads.ApiResponse;
 import com.blog.payloads.FileResponse;
 import com.blog.payloads.PostDTO;
 import com.blog.payloads.PostResponse;
-import com.blog.services.FileService;
+//import com.blog.services.FileService;
 import com.blog.services.PostsService;
 
 @RestController
@@ -34,11 +34,8 @@ public class PostsController {
 	@Autowired
 	PostsService postservice;
 	
-	@Autowired
-	FileService fileservice;
-	
-	@Value("${project.image}")
-	private String path;
+//	@Autowired
+//	FileService fileservice;
 	
 	//create
 	@PostMapping("/user/{userId}/category/{categoryId}/createposts")
@@ -116,16 +113,16 @@ public class PostsController {
 		return new ResponseEntity<List<PostDTO>>(search,HttpStatus.OK);
 	}
 	
-	//postImage upload
-	@PostMapping("/image/upload/{postId}")
-	public ResponseEntity<PostDTO> uploadImage(@RequestParam("image")
-	MultipartFile image,
-	@PathVariable Integer postId) throws IOException{
-		
-		String fileName = this.fileservice.uploadImage(path, image);
-		PostDTO postdto =  postservice.getPostById(postId);
-		postdto.setImageName(fileName);
-		PostDTO post = postservice.updatePost(postdto, postId);
-		return new ResponseEntity<PostDTO>(post, HttpStatus.OK);
-	}
+//	//postImage upload
+//	@PostMapping("/image/upload/{postId}")
+//	public ResponseEntity<PostDTO> uploadImage(@RequestParam("image")
+//	MultipartFile image,
+//	@PathVariable Integer postId) throws IOException{
+//		
+//		String fileName = this.fileservice.uploadImage(path, image);
+//		PostDTO postdto =  postservice.getPostById(postId);
+//		postdto.setImageName(fileName);
+//		PostDTO post = postservice.updatePost(postdto, postId);
+//		return new ResponseEntity<PostDTO>(post, HttpStatus.OK);
+//	}
 }
