@@ -7,6 +7,7 @@
 body{
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif ;
     height: 100vh;
+    background-color: #000000;
 }
 
 
@@ -105,16 +106,30 @@ nav .item :nth-child(4) :hover ~ .underline{
 .page-container{
     display: flex;
     height: 100vh;
+    padding-top: 15px;
 }
 
 .grid-contianer{
+    margin-top: 3
+    0px;
     padding: 15px;
-    flex: 3;
+    flex: 33%;
     width: 1400px;
     height: 100vh;
-    background-size: cover;
+    background-size: contain;
     overflow: hidden;
-    columns:4;
+    columns:2;
+    background-color: black;
+}
+
+.grid-contianer-2{
+    padding: 15px;
+    flex: 33%;
+    width: 1400px;
+    height: 100vh;
+    background-size: contain;
+    overflow: hidden;
+    columns:2;
     background-color: black;
 }
 
@@ -133,7 +148,7 @@ img{
 }
 
 .login-container{
-    flex: 1;
+    flex: 34%;
     color: white;
     display: flex;
     flex-direction: column;
@@ -144,8 +159,8 @@ img{
 }
 
 .logo{
-    height: 200px;
-    width: 200px;
+    height: 280px;
+    width: 280px;
 }
 
 .box{
@@ -313,4 +328,8 @@ img{
 .box form input[type="submit"]:active{
     opacity: 0.8;
 
+}
+
+.footer h2{
+    color: #fff;
 }
