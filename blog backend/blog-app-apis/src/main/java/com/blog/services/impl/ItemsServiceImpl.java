@@ -48,7 +48,7 @@ public class ItemsServiceImpl implements ItemsService{
 	}
 
 	@Override
-	public ItemsDTO updateItem(ItemsDTO itemdto, Integer categoryId, Integer itemId) {
+	public ItemsDTO updateItem(ItemsDTO itemdto, Integer itemId) {
 		ItemsEntity item = itemrepo.findById(itemId).orElseThrow(()-> new ResourceNotFoundException("ItemsEntity", "itemId",itemId));
 		
 		item.setName(itemdto.getName());
@@ -87,9 +87,9 @@ public class ItemsServiceImpl implements ItemsService{
 	}
 
 	@Override
-	public List<ItemsDTO> searchItem() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<ItemsDTO> searchItem(String name) {
+		List<ItemsEntity> items = itemrepo.findByitemName("%" + name + "%");
+		return items.stream().map((item)-> modelmapper.map(item, ItemsDTO.class)).collect(Collectors.toList());
 	}
 
 }
