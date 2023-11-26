@@ -1,0 +1,59 @@
+.cart-items{
+    display: block;
+    margin-bottom: 10px;
+    height: 400px;
+}
+.cart-items img{
+    float: left;
+    width:65%;
+    object-fit: cover;
+    height: 100%;
+    padding-right: 10px;
+}
+.cart-container div{
+    width: 85%;
+}
+.item-body{
+    padding: 20px;
+    height: 100%;
+}
+.cart-container{
+    display: flex;
+    justify-content: center;
+    padding: 40px 0;
+}
+.item-price{
+    font-weight: bold;
+    font-size: 30px;
+}
+.d-block{
+    display:block;
+}
+input[type='number']{
+    width: 70px;
+    padding: 10px 15px;
+
+}
+.total{
+    padding: 30px 110px;
+}
+.total span{
+ display: block;
+}
+.total button{
+    display: block;
+    margin: 10px 0;
+}
+button
+{
+    border: none;
+    padding: 10px 15px;
+}
+.total button:first-of-type{
+    background-color: red;
+    color: white;
+}
+.total button:nth-of-type(2){
+    background-color: black;
+    color: white;
+}

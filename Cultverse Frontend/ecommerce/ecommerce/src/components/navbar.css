@@ -1,0 +1,42 @@
+nav{
+    display: flex;
+    background-color: #000000;
+    height: 5.5rem;
+    padding: 0 5rem;
+    overflow: hidden;
+    justify-content: space-between;
+}
+a{text-decoration: none;}
+.items{
+    display: flex;
+}
+.icon{
+    display: flex;
+    align-items: flex-end;
+    width: 100px;
+}
+.nav-items{
+    display: flex;
+    list-style: none;
+    align-items: flex-end;
+    justify-content: space-between;
+    width: 250px;
+    color: white;
+}
+.nav-links{
+    color: white;
+}
+.icon img{
+    height: 5rem;
+    width: 100%;
+    transform: scale(1.5) translateY(10px);
+}
+.cart{
+    display: flex;
+    align-items: flex-end;
+    color: white;
+    padding: 1rem 0;
+}
+.fa-shopping-cart{
+    font-size: 1.3rem;
+}

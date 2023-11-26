@@ -1,0 +1,29 @@
+.sidemenu{
+    /* height: 100vh; */
+    position: fixed;
+    left: 0;
+    height: calc(100vh - 5.5rem);
+    width: 300px;
+    padding:0 3rem;
+    font-size: 1.2rem;
+}
+a{text-decoration: none;color: black;}
+ul.menu-items{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    margin-bottom: 2rem;
+}
+.border-bottom{
+    border-bottom: 1px solid rgba(128, 128, 128, 0.348);
+}
+.padding-bottom{
+    padding-bottom: 1rem;
+}
+.menu-items li{
+    display: block;
+    margin: 9px 0;
+}
+form{
+    padding-top: 30px;
+}
