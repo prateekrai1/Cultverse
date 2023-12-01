@@ -1,0 +1,33 @@
+.grid-container{
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(2, calc(100% - 40em));
+    gap: 30px;
+    margin-left: 20%;
+}
+.item{
+    /* height: 450px; */
+    text-align: center;
+}
+.img-container{
+    height: 350px;
+    width: 100%;
+    overflow: hidden;
+}
+.item img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    transition: transform 0.55s ease;
+    cursor: pointer;
+}
+.item img:hover {
+    transform: scale(1.1);
+}
+.item span{
+    display: block;
+}
+.item span:first-of-type{
+    padding-top: 30px;
+    font-weight: lighter;
+}
